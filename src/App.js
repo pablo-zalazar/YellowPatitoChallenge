@@ -6,18 +6,18 @@ import Style from "./app.module.css";
 import Form from "./components/Form/Form";
 
 const months = [
-  "enero",
-  "febrero",
-  "marzo",
-  "abril",
-  "mayo",
-  "Junio",
-  "julio",
-  "agosto",
-  "septiembre",
-  "octubre",
-  "Noviembre",
-  "diciembre",
+  { name: "enero", value: 0 },
+  { name: "febrero", value: 0 },
+  { name: "marzo", value: 0 },
+  { name: "abril", value: 0 },
+  { name: "mayo", value: 0 },
+  { name: "Junio", value: 0 },
+  { name: "julio", value: 0 },
+  { name: "agosto", value: 0 },
+  { name: "septiembre", value: 0 },
+  { name: "octubre", value: 0 },
+  { name: "Noviembre", value: 0 },
+  { name: "diciembre", value: 0 },
 ];
 
 function App() {
@@ -38,9 +38,7 @@ function App() {
           const channels = { name: canal.name, products: [] };
           channels.products = productos.map((product) => {
             const products = { id: product.id, name: product.name, value: 0, percentage: 0, months: [] };
-            products.months = months.map((month) => {
-              return { name: month, value: 0 };
-            });
+            products.months = months;
             return products;
           });
           return channels;
@@ -52,10 +50,6 @@ function App() {
     })();
     setLoading(false);
   }, []);
-
-  useEffect(() => {
-    console.log("asdasdasd");
-  }, [countries]);
 
   const handleSelectCountry = (value) => {
     const data = countries.filter((country) => country.name === value);
@@ -105,7 +99,7 @@ function App() {
             return { ...product, months };
           } else {
             emptyValues = true;
-            return { ...product, value: 0, percentage: 0, months: product.months };
+            return { ...product, value: 0, percentage: 0, months };
           }
         });
         return { ...channel, products };
